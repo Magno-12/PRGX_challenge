@@ -118,6 +118,14 @@ You can perform tests in Swagger directly from the FastAPI interface. Here's how
 1. In the "GET /users/" section, expand the GET request and click "Try it out."
 2. In the input area, enter "Country" in the "country" field, then click "Execute" to send the request.
 
+## Run integration test
+
+1. to run the integration tests make sure you are in the same folder as the file and use the following command
+
+```python
+pytest test_app.py
+```
+
 --------------------------------------------------------------------------------------
 ## Development Explanation
 
