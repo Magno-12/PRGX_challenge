@@ -118,6 +118,7 @@ You can perform tests in Swagger directly from the FastAPI interface. Here's how
 1. In the "GET /users/" section, expand the GET request and click "Try it out."
 2. In the input area, enter "Country" in the "country" field, then click "Execute" to send the request.
 
+--------------------------------------------------------------------------------------
 ## Development Explanation
 
 I developed this code to create a FastAPI-based API for managing user data and their associated addresses. In this project, I defined three Pydantic models: UserModel, AddressModel, and UserWithAddressesModel, which represent user information, address details, and a combination of both, respectively. I configured an SQLite database using SQLAlchemy for data storage. The API supports two main functionalities: user creation and user retrieval based on their country of residence. For user creation, I perform validation to ensure that emails are unique, and if not, raise an error. Then, I insert the user and address data into the database. The second endpoint allows users to search for individuals living in a specific country, returning their information in a structured JSON format. This code serves as a foundation for building a user management system with FastAPI and SQLAlchemy.
