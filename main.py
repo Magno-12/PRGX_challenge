@@ -24,6 +24,10 @@ db = []
 
 @app.post("/users/", response_model=UserModel)
 async def create_user(user_with_addresses: UserWithAddressesModel):
+    email_exists = any(user['email'] == user_with_addresses.user.email for user in db)
+    if email_exists:
+        raise HTTPException(status_code=400, detail="Email is already registered")
+
     user_data = user_with_addresses.user.model_dump()
     user_data["addresses"] = [addr.model_dump() for addr in user_with_addresses.addresses]
     db.append(user_data)
@@ -39,6 +43,8 @@ async def get_users_by_country(country: str = Query(..., title="Country", min_le
     users_in_country = []
     for user in db:
         if any(addr['country'] == country for addr in user['addresses']):
+            user_copy = user.copy()
+            user_copy.pop("password")
             users_in_country.append(UserModel(**user))
     if not users_in_country:
         raise HTTPException(status_code=404, detail="No users found in the specified country")
